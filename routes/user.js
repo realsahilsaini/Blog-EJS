@@ -33,20 +33,26 @@ userRouter.get('/signin', (req, res) => {
 
 
 userRouter.post('/signin', async (req, res) => {
-  const {email, password} = req.body;
+  
+  try {
+    const {email, password} = req.body;
 
-  const {passwordMatched, user} = await UserModel.matchPassword(email, password);
+  const token =  await UserModel.matchPasswordAndGenerateToken(email, password);
 
-
-  if(!passwordMatched){
+  if(!token){
     return res.status(400).send('Invalid credentials');
   }
 
-  console.log(user);
-
-
-    res.redirect('/');
+    return res.cookie('token', token).redirect('/');
+  } catch (error) {
+    res.status(400).render('signin', {error: "Invalid credentials"});
+  }
   
+});
+
+
+userRouter.get('/logout', (req, res) => {
+  res.clearCookie('token').redirect('/');
 });
 
 

@@ -8,9 +8,20 @@
 
   <%- include('./partials/nav') %>
   
+  <% if (locals.user){ %>
+    <div class="container mt-5">
+        <div class="col-md-8">
+          <h1 class="">Welcome, <%= locals.user.firstName %>!</h1>
+        </div>
+    </div>
+  <% }else{%>
+    <div class="container mt-5">
+        <div class="col-md-8">
+          <h1 class="">Welcome!</h1>
+        </div>
+    </div>
+  <% } %>
 
-
-
-  
+  <%- include('./partials/scripts.ejs') %>
 </body>
 </html>

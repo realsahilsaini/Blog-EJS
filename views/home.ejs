@@ -17,10 +17,34 @@
   <% }else{%>
     <div class="container mt-5">
         <div class="col-md-8">
-          <h1 class="">Welcome!</h1>
+          <h1 class="">Hello!
+            <br>
+            Please SignUp/Signin to continue...</h1>
         </div>
     </div>
   <% } %>
+
+
+
+
+  <div class="container mt-3 d-flex flex-row column-gap-3 row-gap-8 flex-wrap">
+    <% blogs.forEach(blog => { %>
+      
+      <div class="card" style="width: 18rem; height: 12rem;">
+        <img height="200px" src="<%= blog.coverImageURL %>" class="card-img-top" alt="...">
+        
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= blog.title %>
+          </h5>
+          
+          <a href="/blog/<%= blog._id %>" class="btn btn-primary">View</a>
+        </div>
+      </div>
+
+  <%  }); %>
+  </div>
+
 
   <%- include('./partials/scripts.ejs') %>
 </body>
